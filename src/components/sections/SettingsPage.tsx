@@ -7,8 +7,10 @@ import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
-import { Bot, Store, CreditCard, MessageCircle, Bell, Shield, Save } from "lucide-react";
+import { Bot, Store, CreditCard, MessageCircle, Bell, Shield, Save, Webhook } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import WebhookSettings from "./WebhookSettings";
+import MessagesViewer from "./MessagesViewer";
 
 export const SettingsPage = () => {
   const { toast } = useToast();
@@ -64,7 +66,7 @@ export const SettingsPage = () => {
       </div>
 
       <Tabs defaultValue="restaurant" className="w-full">
-        <TabsList className="grid w-full grid-cols-5 mb-8">
+        <TabsList className="grid w-full grid-cols-6 mb-8">
           <TabsTrigger value="restaurant" className="flex items-center gap-2">
             <Store size={16} />
             Restaurante
@@ -80,6 +82,10 @@ export const SettingsPage = () => {
           <TabsTrigger value="notifications" className="flex items-center gap-2">
             <Bell size={16} />
             Notificações
+          </TabsTrigger>
+          <TabsTrigger value="webhooks" className="flex items-center gap-2">
+            <Webhook size={16} />
+            Webhooks
           </TabsTrigger>
           <TabsTrigger value="security" className="flex items-center gap-2">
             <Shield size={16} />
@@ -330,6 +336,14 @@ export const SettingsPage = () => {
           </Card>
         </TabsContent>
 
+        {/* Webhook Settings */}
+        <TabsContent value="webhooks">
+          <div className="space-y-8">
+            <WebhookSettings />
+            <MessagesViewer />
+          </div>
+        </TabsContent>
+
         {/* Security Settings */}
         <TabsContent value="security">
           <Card className="bg-white/70 backdrop-blur-sm border-gray-200/50">
@@ -356,7 +370,7 @@ export const SettingsPage = () => {
               <div className="bg-yellow-50 p-4 rounded-lg">
                 <h4 className="font-semibold mb-2">Backup Automático</h4>
                 <p className="text-sm text-gray-600 mb-2">
-                  Backups diários automáticos via Supabase
+                  Backups diários automáticos via Firebase
                 </p>
                 <Badge className="bg-yellow-100 text-yellow-800">Ativo</Badge>
               </div>
